@@ -1,15 +1,19 @@
-const { createServer } = require('node:http');
+const express = require('express');
 
-const hostname = '127.0.0.1';
-const port = 3000;
+const cors = require('cors');
+require('dotenv').config();
 
-const server = createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Hello World');
+const app = express();
+const port = process.env.port || 5000;
+
+app.use(cors());
+app.use(express.json());
+
+app.get('/', (req, res) => {
+    res.send('API is running');
 });
 
-server.listen(port, hostname, () => {
-    console.log(`Server running at https://${hostname}:${port}/`);
+app.listen(PORT, () => {
+    console.log(`Server running at https://localhost${port}`);
 
 });
